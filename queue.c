@@ -191,16 +191,16 @@ void q_reverse(queue_t *q)
     if (!q || q->size == 0)
         return;
 
-    list_ele_t *pre = NULL, *temp, *cur = q->head;
-
-    q->tail = q->head;
+    list_ele_t *temp, *cur = q->head;
 
     while (cur) {
         temp = cur->next;
-        cur->next = pre;
-        pre = cur;
+        cur->next = cur->prev;
+        cur->prev = temp;
         cur = temp;
     }
 
-    q->head = pre;
+    temp = q->head;
+    q->head = q->tail;
+    q->tail = temp;
 }
