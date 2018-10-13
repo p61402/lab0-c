@@ -121,10 +121,14 @@ bool q_insert_tail(queue_t *q, char *s)
 
     newh->next = NULL;
 
-    if (q->size == 0)
+    if (q->size == 0) {
+        newh->prev = NULL;
         q->head = newh;
-    else
+    } else {
         q->tail->next = newh;
+        newh->prev = q->tail;
+    }
+
     q->tail = newh;
     q->size++;
 
